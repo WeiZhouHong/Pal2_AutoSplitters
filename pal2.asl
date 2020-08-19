@@ -4,28 +4,28 @@ This ASL is compatible with The Legend of Sword and Fairy 2 versions: V1.05
 */
 
 state("Pal2", "DVD V1.05"){
-	byte menuselect: "Pal2.exe", 0x365C4C; 			//選單狀態1開始遊戲2前塵憶夢
-	byte frames: "Pal2.exe", 0x2A61A0; 				//Frame0-24 每到25張增加1秒遊戲時間
-	uint igt: "Pal2.exe", 0x2AA5B0; 				//遊戲內時間
+	byte menuselect: "Pal2.exe", 0x365C4C; 		//選單狀態1開始遊戲2前塵憶夢
+	byte frames: "Pal2.exe", 0x2A61A0; 		//Frame0-24 每到25張增加1秒遊戲時間
+	uint igt: "Pal2.exe", 0x2AA5B0; 		//遊戲內時間
 	uint money: "Pal2.exe", 0x383AE0; 
 	uint itemcode: "Pal2.exe", 0x383AD0, 0x0, 0x0; 	//最新取得物品
-	uint map: "Pal2.exe", 0x2A66F8; 				//地圖編號
+	uint map: "Pal2.exe", 0x2A66F8; 		//地圖編號
 	uint CCU: "Pal2.exe", 0x5E4A28, 0x518, 0x118; 	//戰鬥時HP指向, 溢傷為負數變為42E
-	uint role1: "Pal2.exe", 0x382BDC; 				//小虎HP
-	uint role2: "Pal2.exe", 0x382FC4; 				//欺霜HP
-	uint role3: "Pal2.exe", 0x3833AC; 				//蘇媚HP
-	uint role4: "Pal2.exe", 0x383794; 				//憶如HP
+	uint role1: "Pal2.exe", 0x382BDC; 		//小虎HP
+	uint role2: "Pal2.exe", 0x382FC4; 		//欺霜HP
+	uint role3: "Pal2.exe", 0x3833AC; 		//蘇媚HP
+	uint role4: "Pal2.exe", 0x383794; 		//憶如HP
 }
 
 startup{
 
 	settings.Add("Remove loading time", true);
 	settings.Add("BOSS AutoSplit", true, "BOSS AutoSplit");
-		settings.Add("hairless", true, "查協", "BOSS Auto-Split");
-		settings.Add("slate1", true, "石版一",  "BOSS AutoSplit");
-		settings.Add("slate2", true, "石版二",  "BOSS AutoSplit");
-		settings.Add("slate3", true, "石版三",  "BOSS AutoSplit");
-		settings.Add("slate4", true, "石版四",  "BOSS AutoSplit");
+		settings.Add("hairless", true, "查協", "BOSS AutoSplit");
+		settings.Add("slate1", true, "石版一", "BOSS AutoSplit");
+		settings.Add("slate2", true, "石版二", "BOSS AutoSplit");
+		settings.Add("slate3", true, "石版三", "BOSS AutoSplit");
+		settings.Add("slate4", true, "石版四", "BOSS AutoSplit");
 		settings.Add("mouse", true, "鼠王", "BOSS AutoSplit");
 		settings.Add("noob", true, "沈齊", "BOSS AutoSplit");
 		settings.Add("zombiecoup", true, "夫妻", "BOSS AutoSplit");
@@ -70,25 +70,25 @@ init
 	vars.frameup = false;
 	//meet boss
 	vars.hairless = false;		//查協
-	vars.mouse = false;			//鼠王
-	vars.noob = false;			//沈齊
+	vars.mouse = false;		//鼠王
+	vars.noob = false;		//沈齊
 	vars.zombiecouple = false;	//夫妻
-	vars.snake = false;			//虞蛇
+	vars.snake = false;		//虞蛇
 	vars.defense = false;		//死守
 	vars.centipede = false;		//蜈王
-	vars.deer = false;			//白鹿
+	vars.deer = false;		//白鹿
 	vars.rockmon =  false;		//岩魔
 	vars.siblings = false;		//兄妹
 	vars.bookworm = false;		//秦儒
-	vars.RPMon = false;			//火畫
+	vars.RPMon = false;		//火畫
 	vars.fourPMon = false;		//四畫
 	vars.fivePMon = false;		//五畫
 	vars.BigPMon = false;		//大畫
 	vars.konglin = false;		//孔磷
-	vars.sow = false;			//豬女
-	vars.lynx = false;			//貓妖
+	vars.sow = false;		//豬女
+	vars.lynx = false;		//貓妖
 	vars.bestfriend = false;	//南松
-	vars.wolf = false;			//嘯狼
+	vars.wolf = false;		//嘯狼
 	vars.finalboss = false;		//千葉
 	
 	byte[] exeMD5HashBytes = new byte[0];
