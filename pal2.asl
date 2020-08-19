@@ -21,31 +21,31 @@ startup{
 
 	settings.Add("Remove loading time", true);
 	settings.Add("BOSS AutoSplit", true, "BOSS AutoSplit");
-		settings.Add("hairless", true, "查協", "BOSS AutoSplit");
-		settings.Add("slate1", true, "石版一", "BOSS AutoSplit");
-		settings.Add("slate2", true, "石版二", "BOSS AutoSplit");
-		settings.Add("slate3", true, "石版三", "BOSS AutoSplit");
-		settings.Add("slate4", true, "石版四", "BOSS AutoSplit");
-		settings.Add("mouse", true, "鼠王", "BOSS AutoSplit");
-		settings.Add("noob", true, "沈齊", "BOSS AutoSplit");
-		settings.Add("zombiecoup", true, "夫妻", "BOSS AutoSplit");
-		settings.Add("snake", true, "虞蛇", "BOSS AutoSplit");
-		settings.Add("defense", true, "死守", "BOSS AutoSplit");
-		settings.Add("centipede", true, "蜈王", "BOSS AutoSplit");
-		settings.Add("deer", true, "白鹿", "BOSS AutoSplit");
-		settings.Add("rockmon", true, "岩魔", "BOSS AutoSplit");
-		settings.Add("siblings", true, "兄妹", "BOSS AutoSplit");
-		settings.Add("bookworm", true, "秦儒", "BOSS AutoSplit");
-		settings.Add("RPMon", true, "火畫", "BOSS AutoSplit");
-		settings.Add("fourPMon", true, "四畫", "BOSS AutoSplit");
-		settings.Add("fivePMon", true, "五畫", "BOSS AutoSplit");
-		settings.Add("BigPMon", true, "大畫", "BOSS AutoSplit");
-		settings.Add("konglin", true, "孔磷", "BOSS AutoSplit");
-		settings.Add("sow", true, "豬女", "BOSS AutoSplit");
-		settings.Add("lynx", true, "貓妖", "BOSS AutoSplit");
-		settings.Add("bestfriend", true, "南松", "BOSS AutoSplit");
-		settings.Add("wolf", true, "嘯狼", "BOSS AutoSplit");
-		settings.Add("finalboss", true, "千葉", "BOSS AutoSplit");
+		settings.Add("BOSS1", true, "查協", "BOSS AutoSplit");
+		settings.Add("BOSS2", true, "石版一", "BOSS AutoSplit");
+		settings.Add("BOSS3", true, "石版二", "BOSS AutoSplit");
+		settings.Add("BOSS4", true, "石版三", "BOSS AutoSplit");
+		settings.Add("BOSS5", true, "石版四", "BOSS AutoSplit");
+		settings.Add("BOSS6", true, "鼠王", "BOSS AutoSplit");
+		settings.Add("BOSS7", true, "沈齊", "BOSS AutoSplit");
+		settings.Add("BOSS8", true, "夫妻", "BOSS AutoSplit");
+		settings.Add("BOSS9", true, "虞蛇", "BOSS AutoSplit");
+		settings.Add("BOSS10", true, "死守", "BOSS AutoSplit");
+		settings.Add("BOSS11", true, "蜈王", "BOSS AutoSplit");
+		settings.Add("BOSS12", true, "白鹿", "BOSS AutoSplit");
+		settings.Add("BOSS13", true, "岩魔", "BOSS AutoSplit");
+		settings.Add("BOSS14", true, "兄妹", "BOSS AutoSplit");
+		settings.Add("BOSS15", true, "秦儒", "BOSS AutoSplit");
+		settings.Add("BOSS16", true, "火畫", "BOSS AutoSplit");
+		settings.Add("BOSS17", true, "四畫", "BOSS AutoSplit");
+		settings.Add("BOSS18", true, "五畫", "BOSS AutoSplit");
+		settings.Add("BOSS19", true, "大畫", "BOSS AutoSplit");
+		settings.Add("BOSS20", true, "孔磷", "BOSS AutoSplit");
+		settings.Add("BOSS21", true, "豬女", "BOSS AutoSplit");
+		settings.Add("BOSS22", true, "貓妖", "BOSS AutoSplit");
+		settings.Add("BOSS23", true, "南松", "BOSS AutoSplit");
+		settings.Add("BOSS24", true, "嘯狼", "BOSS AutoSplit");
+		settings.Add("BOSS25", true, "千葉", "BOSS AutoSplit");
 	
 	vars.ASLVersion = "2020-08-20 for Pal2 DVD V1.05";
 	vars.logFilePath = Directory.GetCurrentDirectory() + "\\Pal2-Autosplitter.log"; //same folder as LiveSplit.exe
@@ -121,67 +121,67 @@ update{
 			vars.frameup = false;
 			}
 			
-	if(current.CCU == 480 && current.map == 13 && settings.Add["hairless"]){
+	if(current.CCU == 480 && current.map == 13 && settings["Boss1"]){
 		//vars.log("hairless true (" + current.CCU + ")");
 		vars.hairless = true;
-		}else if(current.CCU == 1100 && current.map == 58 && settings.Add["mouse"]){
+		}else if(current.CCU == 1100 && current.map == 58 && settings["BOSS6"]){
 			//vars.log("mouse true (" + current.CCU + ")");
 			vars.mouse = true;
-		}else if(current.CCU == 720 && current.map == 43 && settings.Add["noob"]){
+		}else if(current.CCU == 720 && current.map == 43 && settings["BOSS7"]){
 			//vars.log("noob true (" + current.CCU + ")");
 			vars.noob = true;
-		}else if(current.CCU == 1600 && current.map == 87 && settings.Add["zombiecouple"]){
+		}else if(current.CCU == 1600 && current.map == 87 && settings["BOSS8"]){
 			//vars.log("zombiecouple true (" + current.CCU + ")");
 			vars.zombiecouple = true;
-		}else if(current.CCU == 2000 && current.map == 111 && settings.Add["snake"]){
+		}else if(current.CCU == 2000 && current.map == 111 && settings["BOSS9"]){
 			//vars.log("snake true (" + current.CCU + ")");
 			vars.snake = true;
-		}else if(current.CCU == 28000 && current.map == 104 && settings.Add["defense"]){
+		}else if(current.CCU == 28000 && current.map == 104 && settings["BOSS10"]){
 			//vars.log("defense true (" + current.CCU + ")");
 			vars.defense = true;
-		}else if(current.CCU == 3500 && current.map == 119 && settings.Add["centipede"]){
+		}else if(current.CCU == 3500 && current.map == 119 && settings["BOSS11"]){
 			//vars.log("Centipede true (" + current.CCU + ")");
 			vars.centipede = true;
-		}else if(current.CCU == 5300 && current.map == 128 && settings.Add["deer"]){
+		}else if(current.CCU == 5300 && current.map == 128 && settings["BOSS12"]){
 			//vars.log("deer true (" + current.CCU + ")");
 			vars.deer = true;
-		}else if(current.CCU == 6800 && current.map == 134 && settings.Add["rockmon"]){
+		}else if(current.CCU == 6800 && current.map == 134 && settings["BOSS13"]){
 			//vars.log("rockmon true (" + current.CCU + ")");
 			vars.rockmon = true;
-		}else if(current.CCU == 16000 && current.map == 146 && settings.Add["siblings"]){
+		}else if(current.CCU == 16000 && current.map == 146 && settings["BOSS14"]){
 			//vars.log("siblings true (" + current.CCU + ")");
 			vars.siblings = true;
-		}else if(current.CCU == 12000 && current.map == 153 && settings.Add["bookworm"]){
+		}else if(current.CCU == 12000 && current.map == 153 && settings["BOSS15"]){
 			//vars.log("bookworm true (" + current.CCU + ")");
 			vars.bookworm = true;
-		}else if(current.CCU == 3600 && current.map == 601 && settings.Add["RPMon"]){
+		}else if(current.CCU == 3600 && current.map == 601 && settings["BOSS16"]){
 			//vars.log("RPMon true (" + current.CCU + ")");
 			vars.RPMon = true;
-		}else if(current.CCU == 3600 && current.map == 616 && settings.Add["fourPMon"]){
+		}else if(current.CCU == 3600 && current.map == 616 && settings["BOSS17"]){
 			//vars.log("fourPMon true (" + current.CCU + ")");
 			vars.fourPMon = true;
-		}else if(current.CCU == 3600 && current.map == 181 && settings.Add["fivePMon"]){
+		}else if(current.CCU == 3600 && current.map == 181 && settings["BOSS18"]){
 			//vars.log("fivePMon true (" + current.CCU + ")");
 			vars.fivePMon = true;
-		}else if(current.CCU == 6000 && current.map == 181 && settings.Add["BigPMon"]){
+		}else if(current.CCU == 6000 && current.map == 181 && settings["BOSS19"]){
 			//vars.log("BigPMon true (" + current.CCU + ")");
 			vars.BigPMon = true;
-		}else if(current.CCU == 42000 && current.map == 183 && settings.Add["konglin"]){
+		}else if(current.CCU == 42000 && current.map == 183 && settings["BOSS20"]){
 			//vars.log("konglin true (" + current.CCU + ")");
 			vars.konglin = true;
-		}else if(current.CCU == 18000 && current.map == 187 && settings.Add["sow"]){
+		}else if(current.CCU == 18000 && current.map == 187 && settings["BOSS21"]){
 			//vars.log("sow true (" + current.CCU + ")");
 			vars.sow = true;
-		}else if(current.CCU == 20000 && current.map == 154 && settings.Add["lynx"]){
+		}else if(current.CCU == 20000 && current.map == 154 && settings["BOSS22"]){
 			//vars.log("lynx true (" + current.CCU + ")");
 			vars.lynx = true;
-		}else if(current.CCU == 32000 && current.map == 164 && settings.Add["bestfriend"]){
+		}else if(current.CCU == 32000 && current.map == 164 && settings["BOSS23"]){
 			//vars.log("bestfriend true (" + current.CCU + ")");
 			vars.bestfriend = true;
-		}else if(current.CCU == 18000 && current.map == 582 && settings.Add["wolf"]){
+		}else if(current.CCU == 18000 && current.map == 582 && settings["BOSS24"]){
 			//vars.log("wolf true (" + current.CCU + ")");
 			vars.wolf = true;
-		}else if(current.CCU == 54000 && current.map == 177 && settings.Add["finalboss"]){
+		}else if(current.CCU == 54000 && current.map == 177 && settings["BOSS25"]){
 			//vars.log("finalboss true (" + current.CCU + ")");
 			vars.finalboss = true;
 		}else if((current.igt < old.igt && current.menuselect == 2)| current.menuselect == 3){
@@ -245,19 +245,19 @@ split{
 		vars.hairless = false;
 		return true;
 	}
-	if(current.itemcode == 5116 && old.itemcode != current.itemcode && settings.Add["slate1"]){
+	if(current.itemcode == 5116 && old.itemcode != current.itemcode && settings["BOSS2"]){
 		vars.log("slate1 kill (" + old.CCU + ")");
 		return true;
 	}
-	if(current.itemcode == 5117 && old.itemcode != current.itemcode && settings.Add["slate2"]){
+	if(current.itemcode == 5117 && old.itemcode != current.itemcode && settings["BOSS3"]){
 		vars.log("slate2 kill (" + old.CCU + ")");
 		return true;
 	}
-	if(current.itemcode == 5118 && old.itemcode != current.itemcode && settings.Add["slate3"]){
+	if(current.itemcode == 5118 && old.itemcode != current.itemcode && settings["BOSS4"]){
 		vars.log("slate3 kill (" + old.CCU + ")");
 		return true;
 	}
-	if(current.itemcode == 5119 && old.itemcode != current.itemcode && settings.Add["slate4"]){
+	if(current.itemcode == 5119 && old.itemcode != current.itemcode && settings["BOSS5"]){
 		vars.log("slate4 kill (" + old.CCU + ")");
 		return true;
 	}
