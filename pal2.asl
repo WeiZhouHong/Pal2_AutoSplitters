@@ -121,7 +121,7 @@ update{
 			vars.frameup = false;
 			}
 			
-	if(current.CCU == 480 && current.map == 13 && settings["Boss1"]){
+	if(current.CCU == 480 && current.map == 13 && settings["BOSS1"]){
 		//vars.log("hairless true (" + current.CCU + ")");
 		vars.hairless = true;
 		}else if(current.CCU == 1100 && current.map == 58 && settings["BOSS6"]){
