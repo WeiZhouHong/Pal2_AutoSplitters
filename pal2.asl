@@ -3,9 +3,10 @@ The Legend of Sword and Fairy 2(PAL2) - ASL primarily by master_fiora
 This ASL is compatible with The Legend of Sword and Fairy 2 versions: V1.05
 */
 
-state("Pal2", "DVD V1.05"){
+state("Pal2", "1.05DVD"){
 	byte menuselect: "Pal2.exe", 0x365C4C; 		//選單狀態1開始遊戲2前塵憶夢
 	byte frames: "Pal2.exe", 0x2A61A0; 		//Frame0-24 每到25張增加1秒遊戲時間
+	uint bgm: "Pal2.exe", 0x35180C;			//BGM00-88
 	uint igt: "Pal2.exe", 0x2AA5B0; 		//遊戲內時間
 	uint money: "Pal2.exe", 0x383AE0; 
 	uint itemcode: "Pal2.exe", 0x383AD0, 0x0, 0x0; 	//最新取得物品
@@ -18,8 +19,9 @@ state("Pal2", "DVD V1.05"){
 }
 
 startup{
-
+	settings.Add("20200823修正時間不動BUG", false);
 	settings.Add("Remove loading time", true);
+	settings.Add("Reset on start pal2.exe", true);
 	settings.Add("BOSS AutoSplit", true, "BOSS AutoSplit");
 		settings.Add("BOSS1", true, "查協", "BOSS AutoSplit");
 		settings.Add("BOSS2", true, "石版一", "BOSS AutoSplit");
@@ -47,7 +49,7 @@ startup{
 		settings.Add("BOSS24", true, "嘯狼", "BOSS AutoSplit");
 		settings.Add("BOSS25", true, "千葉", "BOSS AutoSplit");
 	
-	vars.ASLVersion = "2020-08-20 for Pal2 DVD V1.05";
+	vars.ASLVersion = "2020-08-23 for Pal2 DVD V1.05";
 	vars.logFilePath = Directory.GetCurrentDirectory() + "\\Pal2-Autosplitter.log"; //same folder as LiveSplit.exe
 	vars.log = (Action<string>)((string logLine) => {
 		string time = System.DateTime.Now.ToString("dd/MM/yy hh:mm:ss:fff");
@@ -67,7 +69,7 @@ init
 {	
 	//gamestate
 	refreshRate = 25; //same value as game-fpsrate
-	vars.frameup = false;
+	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
 	vars.mouse = false;		//鼠王
@@ -103,7 +105,7 @@ init
 	print("MD5Hash: " + MD5Hash.ToString()); //DebugView
 	
 	if(MD5Hash == "6BF7F535002C59F5F5DB06F69053F9EF"){
-		version = "1.05DVD"; 
+		version = "1.05DVD (繁)"; 
 		vars.log("Detected game version: " + version + " - MD5Hash: " + MD5Hash);
 	}
 	else{
@@ -117,9 +119,7 @@ update{
 		vars.frameup = true;
 	}else if(current.frames == old.frames){
 		vars.frameup = false;
-		}else{
-			vars.frameup = false;
-			}
+		}
 			
 	if(current.CCU == 480 && current.map == 13 && settings["BOSS1"]){
 		//vars.log("hairless true (" + current.CCU + ")");
@@ -184,7 +184,7 @@ update{
 		}else if(current.CCU == 54000 && current.map == 177 && settings["BOSS25"]){
 			//vars.log("finalboss true (" + current.CCU + ")");
 			vars.finalboss = true;
-		}else if((current.igt < old.igt && current.menuselect == 2)| current.menuselect == 3){
+		}else if(current.menuselect > old.menuselect){
 			vars.hairless = false;
 			vars.mouse = false;
 			vars.noob = false;
@@ -206,14 +206,18 @@ update{
 			vars.bestfriend = false;
 			vars.wolf = false;
 			vars.finalboss = false;
-			//print("Reset all vars");
+			print("Reset all vars");
 			//vars.log("Reset all boss-vars!");
 		}
 }
 
 isLoading{
-	if(settings["Remove loading time"] && vars.frameup == false){
+	if(settings["Remove loading time"] && !vars.frameup){
 		//print("Loading on MapID: " + current.map.ToString()); //DebugView
+		return true;
+	}
+	if(settings["Reset on start pal2.exe"] && current.map == 501 && current.bgm == 99 && (current.role1 == 150 && current.role2 == 360 && current.role3 == 150 && current.role4 == 120)){
+		print("Reset on start pal2.exe"); //DebugView
 		return true;
 	}
 	else{
@@ -222,7 +226,7 @@ isLoading{
 }
 
 start{
-	if(current.igt == 0 && current.frames != old.frames && current.menuselect == 1){
+	if(current.igt == 0 && current.frames != old.frames && old.bgm == 1){
 		print("GameStart"); //DebugView
 		return true;
 	}
@@ -230,7 +234,7 @@ start{
 
 
 reset{
-	if(current.igt == 0 && current.frames != old.frames && current.menuselect == 1 && current.itemcode <= 10000){
+	if(current.igt == 0 && current.frames != old.frames && current.menuselect == 1 && old.bgm == 1){
 		//print("Reset, new-item-code:" + current.itemcode.ToString());
 		return true;
 	}else{
