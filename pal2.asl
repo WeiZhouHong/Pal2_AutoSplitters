@@ -21,7 +21,7 @@ state("Pal2", "1.05 DVD (TW)"){				//台版DVD
 state("Pal2", "1.05 CUBE (CN)"){			//方块游戏平台
 	byte menuselect: "Pal2.exe", 0x31032C; 		//選單狀態1開始遊戲2前塵憶夢
 	byte frames: "Pal2.exe", 0x331F7C; 		//Frame0-24 每到25張增加1秒遊戲時間
-	uint bgm: "Pal2.exe", 0x2FBF64;			//BGM00-88
+	uint bgm: "Pal2.exe", 0x2FBEEC;			//BGM00-88
 	uint igt: "Pal2.exe", 0x254C48; 		//遊戲內時間
 	uint money: "Pal2.exe", 0x32E1F8; 
 	uint itemcode: "Pal2.exe", 0x32E1E8, 0x0, 0x0; 	//最新取得物品
