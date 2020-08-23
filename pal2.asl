@@ -18,7 +18,7 @@ state("Pal2", "1.05 DVD (TW)"){				//台版DVD
 	uint role4: "Pal2.exe", 0x383794; 		//憶如HP
 }
 
-state("Pal2", "1.05 CUBE (CN)"){				//方块游戏平台
+state("Pal2", "1.05 CUBE (CN)"){			//方块游戏平台
 	byte menuselect: "Pal2.exe", 0x31032C; 		//選單狀態1開始遊戲2前塵憶夢
 	byte frames: "Pal2.exe", 0x331F7C; 		//Frame0-24 每到25張增加1秒遊戲時間
 	uint bgm: "Pal2.exe", 0x2FBF64;			//BGM00-88
