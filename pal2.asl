@@ -3,7 +3,7 @@ The Legend of Sword and Fairy 2(PAL2) - ASL primarily by master_fiora
 This ASL is compatible with The Legend of Sword and Fairy 2 versions: V1.05
 */
 
-state("Pal2", "1.05DVD"){
+state("Pal2", "1.05DVD"){				//台版DVD
 	byte menuselect: "Pal2.exe", 0x365C4C; 		//選單狀態1開始遊戲2前塵憶夢
 	byte frames: "Pal2.exe", 0x2A61A0; 		//Frame0-24 每到25張增加1秒遊戲時間
 	uint bgm: "Pal2.exe", 0x35180C;			//BGM00-88
@@ -18,8 +18,23 @@ state("Pal2", "1.05DVD"){
 	uint role4: "Pal2.exe", 0x383794; 		//憶如HP
 }
 
+state("Pal2", "1.05CUBE"){				//方块游戏平台
+	byte menuselect: "Pal2.exe", 0x31032C; 		//選單狀態1開始遊戲2前塵憶夢
+	byte frames: "Pal2.exe", 0x331F7C; 		//Frame0-24 每到25張增加1秒遊戲時間
+	uint bgm: "Pal2.exe", 0x2FBF64;			//BGM00-88
+	uint igt: "Pal2.exe", 0x254C48; 		//遊戲內時間
+	uint money: "Pal2.exe", 0x32E1F8; 
+	uint itemcode: "Pal2.exe", 0x32E1E8, 0x0, 0x0; 	//最新取得物品
+	uint map: "Pal2.exe", 0x250D90; 		//地圖編號
+	uint CCU: "Pal2.exe", 0x58F150, 0x518, 0x118; 	//戰鬥時HP指向, 溢傷為負數變為42E
+	uint role1: "Pal2.exe", 0x32D2F4; 		//小虎HP
+	uint role2: "Pal2.exe", 0x32D6DC; 		//欺霜HP
+	uint role3: "Pal2.exe", 0x32DAC4; 		//蘇媚HP
+	uint role4: "Pal2.exe", 0x32DEAC; 		//憶如HP
+}
+
 startup{
-	settings.Add("20200823修正時間不動BUG", false);
+	settings.Add("20200824 Release notes: 支援方块游戏Pal2", false);
 	settings.Add("Remove loading time", true);
 	settings.Add("Reset on start pal2.exe", true);
 	settings.Add("BOSS AutoSplit", true, "BOSS AutoSplit");
@@ -49,7 +64,7 @@ startup{
 		settings.Add("BOSS24", true, "嘯狼", "BOSS AutoSplit");
 		settings.Add("BOSS25", true, "千葉", "BOSS AutoSplit");
 	
-	vars.ASLVersion = "2020-08-23 for Pal2 DVD V1.05";
+	vars.ASLVersion = "2020-08-24 for Pal2 V1.05";
 	vars.logFilePath = Directory.GetCurrentDirectory() + "\\Pal2-Autosplitter.log"; //same folder as LiveSplit.exe
 	vars.log = (Action<string>)((string logLine) => {
 		string time = System.DateTime.Now.ToString("dd/MM/yy hh:mm:ss:fff");
@@ -105,12 +120,16 @@ init
 	print("MD5Hash: " + MD5Hash.ToString()); //DebugView
 	
 	if(MD5Hash == "6BF7F535002C59F5F5DB06F69053F9EF"){
-		version = "1.05DVD (繁)"; 
+		version = "1.05 DVD (TW)"; 
 		vars.log("Detected game version: " + version + " - MD5Hash: " + MD5Hash);
 	}
-	else{
-		version = "old version"; 
+	else if(MD5Hash == "10BADCA2B382ADDBD6A65F7325A30D08"){
+		version = "1.05 CUBE (CN)"; 
 		vars.log("other game version: " + version + " - MD5Hash: " + MD5Hash);	
+	}
+	else{
+		version = "unknown version"; 
+		vars.log("Unknown version: " + version + " - MD5Hash: " + MD5Hash);	
 	}
 }
 
