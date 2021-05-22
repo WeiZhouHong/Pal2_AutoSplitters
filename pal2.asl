@@ -138,10 +138,10 @@ init
 }
 
 update{
-	if(current.frames != old.frames){
-		vars.frameup = true;
-	}else{
+	if(current.frames = old.frames){
 		vars.frameup = false;
+	}else{
+		vars.frameup = true;
 	}
 			
 	if(current.CCU == 480 && current.map == 13 && settings["BOSS1"]){
