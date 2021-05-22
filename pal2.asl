@@ -322,7 +322,7 @@ split{
 		return true;
 	}
 //	if(vars.rockmon == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
-	if(vars.rockmon == true && current.money != old.money){
+	if(vars.rockmon == true && current.money > old.money){
 		vars.log("rockmon kill (" + old.CCU + ")");
 		vars.rockmon = false;
 		return true;
