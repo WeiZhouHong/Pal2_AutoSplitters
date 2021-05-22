@@ -87,7 +87,7 @@ startup{
 init
 {	
 	//gamestate
-	refreshRate = 24.5; //same value as game-fpsrate
+	refreshRate = 25; //same value as game-fpsrate
 	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
@@ -140,9 +140,9 @@ init
 update{
 	if(current.frames != old.frames){
 		vars.frameup = true;
-	else if(current.frames == old.frames){
+	else{
 		vars.frameup = false;
-		}
+	}
 			
 	if(current.CCU == 480 && current.map == 13 && settings["BOSS1"]){
 		//vars.log("hairless true (" + current.CCU + ")");
