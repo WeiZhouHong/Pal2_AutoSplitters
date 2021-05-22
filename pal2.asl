@@ -87,7 +87,7 @@ startup{
 init
 {	
 	//gamestate
-	refreshRate = 24; //same value as game-fpsrate
+	refreshRate = 24.5; //same value as game-fpsrate
 	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
@@ -140,7 +140,7 @@ init
 update{
 	if(current.frames != old.frames){
 		vars.frameup = true;
-	}else if(current.frames == old.frames){
+	else if(current.frames == old.frames){
 		vars.frameup = false;
 		}
 			
