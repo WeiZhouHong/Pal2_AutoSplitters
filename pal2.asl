@@ -1,10 +1,7 @@
 /*
 The Legend of Sword and Fairy 2(PAL2) - ASL primarily by master_fiora
 This ASL is compatible with The Legend of Sword and Fairy 2 versions: V1.05
-最後更新日期：
-2021/05/22 
-1.解決判定延遲問題，或者因遊戲LAG導致多重判定。
-2.解決多重輸入可能導致遊戲時間短暫暫停。
+最後更新日期：2021/05/22 
 */
 
 state("Pal2", "1.05 DVD (TW)"){				//台版DVD
@@ -38,7 +35,7 @@ state("Pal2", "1.05 CUBE (CN)"){			//方块游戏平台
 }
 
 startup{
-	settings.Add("20210522 Release notes: 更新計時器的一些BUG", false);
+	settings.Add("20210522 Release notes: 更新計時器BUG", false);
 	settings.Add("Remove loading time", true);
 	settings.Add("Reset on start pal2.exe", true);
 	settings.Add("BOSS AutoSplit", true, "BOSS AutoSplit");
@@ -87,7 +84,7 @@ startup{
 init
 {	
 	//gamestate
-	refreshRate = 50; //same value as game-fpsrate
+	refreshRate = 60; //same value as game-fpsrate
 	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
@@ -138,7 +135,7 @@ init
 }
 
 update{
-	if(current.frames = old.frames){
+	if(current.frames == old.frames){
 		vars.frameup = false;
 	}else{
 		vars.frameup = true;
