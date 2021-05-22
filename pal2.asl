@@ -140,7 +140,7 @@ init
 update{
 	if(current.frames != old.frames){
 		vars.frameup = true;
-	else{
+	}else{
 		vars.frameup = false;
 	}
 			
