@@ -87,7 +87,7 @@ startup{
 init
 {	
 	//gamestate
-	refreshRate = 25; //same value as game-fpsrate
+	refreshRate = 50; //same value as game-fpsrate
 	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
