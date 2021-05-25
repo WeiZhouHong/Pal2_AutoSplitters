@@ -17,6 +17,8 @@ state("Pal2", "1.05 DVD (TW)"){				//台版DVD
 	uint role2: "Pal2.exe", 0x382FC4; 		//欺霜HP
 	uint role3: "Pal2.exe", 0x3833AC; 		//蘇媚HP
 	uint role4: "Pal2.exe", 0x383794; 		//憶如HP
+	long loadblade: "Pal2.exe", 0x2B4598;	//讀取刀
+	
 }
 
 state("Pal2", "1.05 CUBE (CN)"){			//方块游戏平台
@@ -135,7 +137,7 @@ init
 }
 
 update{
-	if(current.frames == old.frames){
+	if(current.frames == old.frames && current.loadblade != 4294967295){
 		vars.frameup = false;
 	}else{
 		vars.frameup = true;
