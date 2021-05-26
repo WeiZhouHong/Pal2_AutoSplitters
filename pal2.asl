@@ -1,7 +1,7 @@
 /*
 The Legend of Sword and Fairy 2(PAL2) - ASL primarily by master_fiora
 This ASL is compatible with The Legend of Sword and Fairy 2 versions: V1.05
-最後更新日期：2021/05/22 
+最後更新日期：2021/05/26 
 */
 
 state("Pal2", "1.05 DVD (TW)"){				//台版DVD
@@ -17,7 +17,7 @@ state("Pal2", "1.05 DVD (TW)"){				//台版DVD
 	uint role2: "Pal2.exe", 0x382FC4; 		//欺霜HP
 	uint role3: "Pal2.exe", 0x3833AC; 		//蘇媚HP
 	uint role4: "Pal2.exe", 0x383794; 		//憶如HP
-	long loadblade: "Pal2.exe", 0x2B4598;	//讀取刀
+	uint state: "Pal2.exe", 0x2B4598;		//當前狀態
 	
 }
 
@@ -34,6 +34,7 @@ state("Pal2", "1.05 CUBE (CN)"){			//方块游戏平台
 	uint role2: "Pal2.exe", 0x32D6DC; 		//欺霜HP
 	uint role3: "Pal2.exe", 0x32DAC4; 		//蘇媚HP
 	uint role4: "Pal2.exe", 0x32DEAC; 		//憶如HP
+	uint state: "Pal2.exe", 0x25EC30;		//當前狀態
 }
 
 startup{
@@ -86,7 +87,7 @@ startup{
 init
 {	
 	//gamestate
-	refreshRate = 25; //same value as game-fpsrate
+	refreshRate = 50; //same value as game-fpsrate
 	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
@@ -137,7 +138,8 @@ init
 }
 
 update{
-	if(current.frames == old.frames && current.loadblade != 4294967295){
+	/* 過圖讀取為 4294967293，戰鬥中為 4294905761 交易中為 4294902083 序幕與動畫 4294901761*/
+	if(current.frames == old.frames && (current.state == 4294967293 | current.state == 4294905761 | current.state == 4294902083 | current.state == 4294901761)){
 		vars.frameup = false;
 	}else{
 		vars.frameup = true;
