@@ -87,7 +87,7 @@ startup{
 init
 {	
 	//gamestate
-	refreshRate = 50; //same value as game-fpsrate
+	refreshRate = 25; //same value as game-fpsrate
 	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
@@ -138,8 +138,7 @@ init
 }
 
 update{
-	/* 過圖讀取為 4294967293，戰鬥中為 4294905761 交易中為 4294902083 序幕與動畫 4294901761*/
-	if(current.frames == old.frames && (current.state == 4294967293 | current.state == 4294905761 | current.state == 4294902083 | current.state == 4294901761)){
+	if(current.frames == old.frames && current.igt == old.igt && current.state == 4294967293){
 		vars.frameup = false;
 	}else{
 		vars.frameup = true;
