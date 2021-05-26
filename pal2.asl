@@ -38,7 +38,7 @@ state("Pal2", "1.05 CUBE (CN)"){			//方块游戏平台
 }
 
 startup{
-	settings.Add("20210522 Release notes: 更新計時器BUG", false);
+	settings.Add("20210526 Release notes: 解決空白鍵連刷遊戲時間變慢BUG", false);
 	settings.Add("Remove loading time", true);
 	settings.Add("Reset on start pal2.exe", true);
 	settings.Add("BOSS AutoSplit", true, "BOSS AutoSplit");
@@ -68,7 +68,7 @@ startup{
 		settings.Add("BOSS24", true, "嘯狼", "BOSS AutoSplit");
 		settings.Add("BOSS25", true, "千葉", "BOSS AutoSplit");
 	
-	vars.ASLVersion = "2021-05-22 for Pal2 V1.05";
+	vars.ASLVersion = "2021-05-26 for Pal2 V1.05";
 	vars.logFilePath = Directory.GetCurrentDirectory() + "\\Pal2-Autosplitter.log"; //same folder as LiveSplit.exe
 	vars.log = (Action<string>)((string logLine) => {
 		string time = System.DateTime.Now.ToString("dd/MM/yy hh:mm:ss:fff");
