@@ -138,7 +138,8 @@ init
 }
 
 update{
-	if(current.frames == old.frames && current.igt == old.igt && current.state == 4294967293){
+	// 4294967293 絕大多數的讀取過圖 4294901905 初入天師陵寢 序幕 4294901761
+	if(current.frames == old.frames && current.igt == old.igt && current.state == 4294967293 | current.state == 4294901905 | current.state == 4294901761){
 		vars.frameup = false;
 	}else{
 		vars.frameup = true;
