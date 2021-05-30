@@ -91,6 +91,10 @@ init
 	vars.frameup = true;
 	//meet boss
 	vars.hairless = false;		//查協
+	vars.slateone = false;		//石板1
+	vars.slatetwo = false;		//石板2
+	vars.slatethree = false;	//石板3
+	vars.slatefour = false;		//石板4
 	vars.mouse = false;		//鼠王
 	vars.noob = false;		//沈齊
 	vars.zombiecouple = false;	//夫妻
@@ -148,6 +152,18 @@ update{
 	if(current.CCU == 480 && current.map == 13 && settings["BOSS1"]){
 		//vars.log("hairless true (" + current.CCU + ")");
 		vars.hairless = true;
+		}else if(current.CCU > 180 && current.CCU<1000 && current.map == 11 && settings["BOSS2"]){
+			//vars.log("slateone true (" + current.CCU + ")");
+            vars.slateone = true;
+		}else if(current.CCU > 180 && current.CCU<1000 && current.map == 16 && settings["BOSS3"]){
+			//vars.log("slatetwo true (" + current.CCU + ")");
+            vars.slatetwo = true;
+		}else if(current.CCU > 180 && current.CCU<1000 && current.map == 17 && settings["BOSS4"]){
+			//vars.log("slatethree true (" + current.CCU + ")");
+            vars.slatethree = true;
+		}else if(current.CCU > 180 && current.CCU<1000 && current.map == 18 && settings["BOSS5"]){
+			//vars.log("slatefour true (" + current.CCU + ")");
+            vars.slatefour = true;
 		}else if(current.CCU == 1100 && current.map == 58 && settings["BOSS6"]){
 			//vars.log("mouse true (" + current.CCU + ")");
 			vars.mouse = true;
@@ -210,6 +226,10 @@ update{
 			vars.finalboss = true;
 		}else if(current.menuselect > old.menuselect){
 			vars.hairless = false;
+			vars.slateone = false;
+			vars.slatetwo = false;
+			vars.slatethree = false;
+			vars.slatefour = false;
 			vars.mouse = false;
 			vars.noob = false;
 			vars.zombiecouple = false;
@@ -268,11 +288,32 @@ reset{
 
 
 split{
-	if(vars.hairless == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.hairless == true && current.money > old.money){
 		vars.log("hairless kill (" + old.CCU + ")");
 		vars.hairless = false;
 		return true;
 	}
+	if(vars.slateone == true && current.money > old.money + 80){
+		vars.log("slateone kill (" + old.CCU + ")");
+		vars.slateone = false;
+		return true;
+	}
+	if(vars.slatetwo == true && current.money > old.money + 80){
+		vars.log("slate2 kill (" + old.CCU + ")");
+		vars.slatetwo = false;
+		return true;
+	}
+	if(vars.slatethree == true && current.money > old.money + 80){
+		vars.log("slate3 kill (" + old.CCU + ")");
+		vars.slatethree = false;
+		return true;
+	}
+	if(vars.slatefour == true && current.money > old.money + 80){
+		vars.log("slate4 kill (" + old.CCU + ")");
+		vars.slatefour = false;
+		return true;
+	}
+	/* 石版任務道具判定
 	if(current.itemcode == 5116 && old.itemcode != current.itemcode && settings["BOSS2"]){
 		vars.log("slate1 kill (" + old.CCU + ")");
 		return true;
@@ -289,23 +330,24 @@ split{
 		vars.log("slate4 kill (" + old.CCU + ")");
 		return true;
 	}
-	if(vars.mouse == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	石版任務道具判定 */
+	if(vars.mouse == true && current.money > old.money){
 		vars.log("mouse kill (" + old.CCU + ")");
 		vars.mouse = false;
 		return true;
 	}
-	if(vars.noob == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.noob == true && current.money > old.money){
 		vars.log("noob kill (" + old.CCU + ")");
 		vars.noob = false;
 		return true;
 	}
 
-	if(vars.zombiecouple == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.zombiecouple == true && current.money > old.money){
 		vars.log("zombiecouple kill (" + old.CCU + ")");
 		vars.zombiecouple = false;
 		return true;
 	}	
-	if(vars.snake == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.snake == true && current.money > old.money){
 		vars.log("snake kill (" + old.CCU + ")");
 		vars.snake = false;
 		return true;
@@ -315,78 +357,77 @@ split{
 		vars.defense = false;
 		return true;
 	}
-	if(vars.deer == true && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.deer == true && current.money > old.money){
 		vars.log("deer kill (" + old.CCU + ")");
 		vars.deer = false;
 		return true;
 	}
-	if(vars.centipede == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.centipede == true && current.money > old.money){
 		vars.log("centipede kill (" + old.CCU + ")");
 		vars.centipede = false;
 		return true;
 	}
-//	if(vars.rockmon == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
 	if(vars.rockmon == true && current.money > old.money){
 		vars.log("rockmon kill (" + old.CCU + ")");
 		vars.rockmon = false;
 		return true;
 	}
-	if(vars.siblings == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.siblings == true && current.money > old.money){
 		vars.log("siblings kill (" + old.CCU + ")");
 		vars.siblings = false;
 		return true;
 	}
-	if(vars.bookworm == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.bookworm == true && current.money > old.money){
 		vars.log("bookworm kill (" + old.CCU + ")");
 		vars.bookworm = false;
 		return true;
 	}
-	if(vars.RPMon == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.RPMon == true && current.money > old.money){
 		vars.log("RPMon kill (" + old.CCU + ")");
 		vars.RPMon = false;
 		return true;
 	}
-	if(vars.fourPMon == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.fourPMon == true && current.money > old.money){
 		vars.log("RPMon kill (" + old.CCU + ")");
 		vars.fourPMon = false;
 		return true;
 	}
-	if(vars.fivePMon == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.fivePMon == true && current.money > old.money){
 		vars.log("RPMon kill (" + old.CCU + ")");
 		vars.fivePMon = false;
 		return true;
 	}
-	if(vars.BigPMon == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.BigPMon == true && current.money > old.money){
 		vars.log("BigPMon kill (" + old.CCU + ")");
 		vars.BigPMon = false;
 		return true;
 	}
-	if(vars.konglin == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.konglin == true && current.money > old.money){
 		vars.log("konglin kill (" + old.CCU + ")");
 		vars.konglin = false;
 		return true;
 	}
-	if(vars.sow == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.sow == true && current.money > old.money){
 		vars.log("sow kill (" + old.CCU + ")");
 		vars.sow = false;
 		return true;
 	}
-	if(vars.lynx == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.lynx == true && current.money > old.money){
 		vars.log("lynx kill (" + old.CCU + ")");
 		vars.lynx = false;
 		return true;
 	}
-	if(vars.bestfriend == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.bestfriend == true && current.money > old.money){
 		vars.log("bestfriend kill (" + old.CCU + ")");
 		vars.bestfriend = false;
 		return true;
 	}
-	if(vars.wolf == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.wolf == true && current.money > old.money){
 		vars.log("wolf kill (" + old.CCU + ")");
 		vars.wolf = false;
 		return true;
 	}
-	if(vars.finalboss == true && old.CCU > 0 && (current.CCU == 0 | current.CCU > 65535)){
+	if(vars.finalboss == true && current.money > old.money){
 		vars.log("finalboss kill (" + old.CCU + ")");
 		vars.finalboss = false;
 		return true;
