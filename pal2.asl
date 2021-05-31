@@ -1,7 +1,7 @@
 /*
 The Legend of Sword and Fairy 2(PAL2) - ASL primarily by master_fiora
 This ASL is compatible with The Legend of Sword and Fairy 2 versions: V1.05
-最後更新日期：2021/05/26 
+最後更新日期：2021/6/1 
 */
 
 state("Pal2", "1.05 DVD (TW)"){				//台版DVD
@@ -86,6 +86,8 @@ startup{
 
 init
 {	
+	//版本判定
+	vars.DVD = false;
 	//gamestate
 	refreshRate = 25; //same value as game-fpsrate
 	vars.frameup = true;
@@ -129,10 +131,12 @@ init
 	
 	if(MD5Hash == "6BF7F535002C59F5F5DB06F69053F9EF"){
 		version = "1.05 DVD (TW)"; 
+		vars.DVD = true; //繁體DVD版
 		vars.log("Detected game version: " + version + " - MD5Hash: " + MD5Hash);
 	}
 	else if(MD5Hash == "10BADCA2B382ADDBD6A65F7325A30D08"){
 		version = "1.05 CUBE (CN)"; 
+		vars.DVD = false; //方块游戏平台
 		vars.log("other game version: " + version + " - MD5Hash: " + MD5Hash);	
 	}
 	else{
@@ -142,8 +146,11 @@ init
 }
 
 update{
-	// 4294967293 絕大多數的讀取過圖 4294901905 初入天師陵寢 序幕 4294901761
-	if(current.frames == old.frames && current.igt == old.igt && current.state == 4294967293 | current.state == 4294901905 | current.state == 4294901761){
+	// 方塊版專用，避免空白和回車按住隨意停止遊戲計時: 4294967293 絕大多數的讀取過圖 4294901905 初入天師陵寢 4294901761 序幕 
+	if(!vars.DVD && current.frames == old.frames && current.igt == old.igt && current.state == 4294967293 | current.state == 4294901905 | (current.state == 4294901761 && current.map != 501) ){
+		vars.frameup = false;
+	// 繁體版DVD只要加入 IGT 則不會隨意停止
+	}else if(vars.DVD && current.frames == old.frames && current.igt == old.igt){
 		vars.frameup = false;
 	}else{
 		vars.frameup = true;
