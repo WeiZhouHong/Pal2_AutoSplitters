@@ -1,7 +1,7 @@
 /*
 The Legend of Sword and Fairy 2(PAL2) - ASL primarily by master_fiora
 This ASL is compatible with The Legend of Sword and Fairy 2 versions: V1.05
-最後更新日期：2021/6/1 
+最後更新日期：2021/6/4
 */
 
 state("Pal2", "1.05 DVD (TW)"){				//台版DVD
@@ -37,8 +37,24 @@ state("Pal2", "1.05 CUBE (CN)"){			//方块游戏平台
 	uint state: "Pal2.exe", 0x25EC30;		//當前狀態
 }
 
+state("Pal2_x64", "Steam v3.5.344"){				//Steam版
+	byte menuselect: "Pal2_x64.exe", 0x458EC8; 		//選單狀態1開始遊戲2前塵憶夢
+	byte frames: "Pal2_x64.exe", 0x492C48; 		//每次換圖從0開始增加，有時為1
+	uint bgm: "Pal2_x64.exe", 0x49E8A0;			//BGM00-88
+	float igt: "gameoverlayrenderer64.dll", 0x1C5DA4; 		//開啟遊戲即開始增加
+	uint money: "Pal2_x64.exe", 0x482158; 
+	uint map: "Pal2_x64.exe", 0x493380; 		//地圖編號
+	uint CCU: "Pal2_x64.exe", 0x277A10, 0x10, 0x28, 0x588, 0x118; 	//戰鬥時HP指向, 溢傷為負數變為42E
+	uint role1: "Pal2_x64.exe", 0x48176C; 		//小虎HP
+	uint role2: "Pal2_x64.exe", 0x4819F8; 		//欺霜HP
+	uint role3: "Pal2_x64.exe", 0x481C84; 		//蘇媚HP
+	uint role4: "Pal2_x64.exe", 0x481F10; 		//憶如HP
+	uint state: "Pal2_x64.exe", 0x493A88;		//當前狀態
+	
+}
+
 startup{
-	settings.Add("20210526 Release notes: 解決空白鍵連刷遊戲時間變慢BUG", false);
+	settings.Add("20210604 Release: 支援 Steam/新方塊版 實時計時自動分段", false);
 	settings.Add("Remove loading time", true);
 	settings.Add("Reset on start pal2.exe", true);
 	settings.Add("BOSS AutoSplit", true, "BOSS AutoSplit");
@@ -88,6 +104,7 @@ init
 {	
 	//版本判定
 	vars.DVD = false;
+	vars.steam = false;
 	//gamestate
 	refreshRate = 25; //same value as game-fpsrate
 	vars.frameup = true;
@@ -132,11 +149,19 @@ init
 	if(MD5Hash == "6BF7F535002C59F5F5DB06F69053F9EF"){
 		version = "1.05 DVD (TW)"; 
 		vars.DVD = true; //繁體DVD版
+		refreshRate = 25; //same value as game-fpsrate
 		vars.log("Detected game version: " + version + " - MD5Hash: " + MD5Hash);
 	}
 	else if(MD5Hash == "10BADCA2B382ADDBD6A65F7325A30D08"){
 		version = "1.05 CUBE (CN)"; 
 		vars.DVD = false; //方块游戏平台
+		refreshRate = 25; //same value as game-fpsrate
+		vars.log("other game version: " + version + " - MD5Hash: " + MD5Hash);	
+	}
+	else if(MD5Hash == "022EEE0C33AB7662AD2483B3B640616E"){
+		version = "Steam"; 
+		vars.steam = true; //Steam
+		refreshRate = 60; //same value as game-fpsrate
 		vars.log("other game version: " + version + " - MD5Hash: " + MD5Hash);	
 	}
 	else{
@@ -152,6 +177,8 @@ update{
 	// 繁體版DVD只要加入 IGT 則不會隨意停止
 	}else if(vars.DVD && current.frames == old.frames && current.igt == old.igt){
 		vars.frameup = false;
+	}else if(vars.steam){
+		vars.frameup = true;
 	}else{
 		vars.frameup = true;
 	}
@@ -277,16 +304,20 @@ isLoading{
 }
 
 start{
-	if(current.igt == 0 && current.frames != old.frames && old.bgm == 1){
+	if(current.igt == 0 && current.frames != old.frames && old.bgm == 1 && current.menuselect == 1){
 		print("GameStart"); //DebugView
 		return true;
-	}
+	}else if(vars.steam && current.frames != old.frames && old.bgm == 1 && current.menuselect == 1 && (current.role1 == 150 && current.role2 == 360 && current.role3 == 150 && current.role4 == 120)){
+		return true;
+		}
 }
 
 
 reset{
 	if(current.igt == 0 && current.frames != old.frames && current.menuselect == 1 && old.bgm == 1){
 		//print("Reset, new-item-code:" + current.itemcode.ToString());
+		return true;
+	}else if(vars.steam && current.frames != old.frames && current.menuselect == 1 && old.bgm == 1 && (current.role1 == 150 && current.role2 == 360 && current.role3 == 150 && current.role4 == 120)){
 		return true;
 	}else{
 		return false;
