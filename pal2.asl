@@ -285,7 +285,12 @@ update{
 			vars.wolf = false;
 			vars.finalboss = false;
 			print("Reset all vars");
-			//vars.log("Reset all boss-vars!");
+		}else if(current.map == 2){
+			vars.hairless = false;
+			vars.slateone = false;
+			vars.slatetwo = false;
+			vars.slatethree = false;
+			vars.slatefour = false;
 		}
 }
 
